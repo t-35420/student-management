@@ -1,0 +1,16 @@
+services:
+  mysql:
+    image: mysql:8.0
+    # 本機改用 3307 連線到 Docker 容器內的 MySQL 3306
+    ports:
+      - "3307:3306"
+    container_name: student-management-mysql
+    environment:
+      # 用 ${} 讀取 .env 檔的設定
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
